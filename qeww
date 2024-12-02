@@ -1,0 +1,91 @@
+
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
+
+namespace ConsoleApp13
+{
+    
+        public class Szamok
+        {
+            public List<int> numbers;
+            public string name;
+
+            public Szamok(string line)
+            {
+                string[] lines = line.Split(" ");
+                this.name = lines[lines.Length - 1];
+
+                this.numbers = new List<int>();
+                for (int i = 0; i < lines.Length - 1; i++)
+                {
+                    this.numbers.Add(Int32.Parse(lines[i]));
+                }
+            }
+        }
+        internal class Program
+        {
+            static List<Szamok> szamok = new List<Szamok>();
+
+            public static void fileReader(string fileName)
+            {
+                StreamReader sr = new StreamReader(fileName);
+                string line;
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    szamok.Add(new Szamok(line));
+                }
+            }
+            static void Main(string[] args)
+            {
+                fileReader("egyszamjatek.txt");
+
+                Console.WriteLine($"{szamok.Count} ember vett részt!");
+
+                int sum = 0;
+
+                foreach (Szamok szam in szamok)
+                {
+                    sum = szam.numbers.Count;
+                }
+                Console.WriteLine($"{sum} forduló volt!");
+
+                foreach (Szamok szam in szamok)
+                {
+                    if (szam.numbers[0] == 1)
+                    {
+                        Console.WriteLine("Volt 1-es szám");
+                        break;
+                    }
+                }
+                List<int> allNumbers = new List<int>();
+                foreach (Szamok szam in szamok)
+                {
+                    for (int i = 0; i < szam.numbers.Count; i++)
+                    {
+                        allNumbers.Add(szam.numbers[i]);
+                    }
+                }
+                Console.WriteLine($"{allNumbers.Max()} volt a legnagyobb tipp!");
+
+                int numberOfRounds = 0;
+                foreach (Szamok szam in szamok)
+                {
+                    numberOfRounds = szam.numbers.Count;
+                }
+                Console.WriteLine($"7.feladat: Kérem a forduló sorszámát[1-{numberOfRounds}]:");
+                string readLine = Console.ReadLine();
+
+                foreach (Szamok szam in szamok)
+                {
+                
+                   if (szamok.Contains(readLine))
+                   {
+                        
+                   }
+                }
+            }
+        }
+}
